@@ -8,6 +8,8 @@ const port = 3000;
 const prodotti = require('./data/prodotti')
 const prodottiRouters = require('./routers/prodotto')
 
+
+
 app.use(express.static('public'))
 
 

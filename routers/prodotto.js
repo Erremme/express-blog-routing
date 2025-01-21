@@ -1,20 +1,28 @@
-const express = require('express')
+const express = require('express');
+const prodotti = require('../data/prodotti');
 const router = express.Router();
 
 
 // index
 router.get('/', function(req, res) {
-res.send('Lista dei prodotti');
+res.json(prodotti);
 });
 
 // show
 router.get('/:id', function(req, res) {
-res.send(`Dettagli del prodotto ${req.params.id}`);
+   if(isNaN (req.params.id)){
+      res.sendStatus(400)
+   }
+   const prodotto = prodotti.find(elm => elm.id == req.params.id)
+   if(!prodotto){
+    res.sendStatus(404)
+   }
+   res.json(prodotto);
 });
 
 // store
 router.post('/', function(req, res) {
-res.send('Creazione nuovo prodotto');
+   res.send('Creazione nuovo prodotto');
 });
 
 //update
